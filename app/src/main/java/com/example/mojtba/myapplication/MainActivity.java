@@ -1,0 +1,229 @@
+package com.example.mojtba.myapplication;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static android.widget.RadioGroup.*;
+
+
+public class MainActivity extends AppCompatActivity {
+
+
+    EditText name, id, email, password, batch;
+    Button submit;
+    RadioGroup rg;
+    RadioButton trb,srb;
+    RequestQueue requestQueue;
+    String insertStudentUrl = "http://10.42.0.1/insertStudent.php";
+    String insertTeacherUrl = "http://10.42.0.1/insertTeacher.php";
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+    }
+
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        rg = (RadioGroup) findViewById(R.id.radioGroup);
+
+        srb = (RadioButton) findViewById(R.id.sradio);
+        trb=(RadioButton) findViewById(R.id.tradio);
+
+        submit=(Button)findViewById(R.id.insert);
+
+        id=(EditText) findViewById(R.id.etid) ;
+        name=(EditText)findViewById(R.id.etname);
+        email=(EditText)findViewById(R.id.etemail);
+        password=(EditText)findViewById(R.id.etpassword);
+        batch = (EditText) findViewById(R.id.batch);
+
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
+
+        rg.setOnCheckedChangeListener(new OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+                if(checkedId==trb.getId())
+                {
+                    batch.setVisibility(View.GONE);
+                    batch.setText("");
+                    submit.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            StringRequest request = new StringRequest(Request.Method.POST, insertTeacherUrl, new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+
+                                    System.out.println(response.toString());
+                                    try {
+                                        JSONObject jsonObject=new JSONObject(response);
+                                        if (jsonObject.names().get(0).equals("reg_failed")){
+                                            Toast.makeText(getApplicationContext(),jsonObject.getString("reg_failed"),Toast.LENGTH_LONG).show();
+
+                                        }else if (jsonObject.names().get(0).equals("empty")){
+                                            Toast.makeText(getApplicationContext(),jsonObject.getString("empty"),Toast.LENGTH_SHORT).show();
+
+                                        }
+                                        else {
+                                            Toast.makeText(getApplicationContext(),"Done",Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+
+
+
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }, new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+
+                                }
+                            }) {
+
+                                @Override
+                                protected Map<String, String> getParams() throws AuthFailureError {
+                                    Map<String,String> parameters  = new HashMap<String, String>();
+                                    parameters.put("tid",id.getText().toString());
+                                    parameters.put("name",name.getText().toString());
+                                    parameters.put("password",password.getText().toString());
+                                    parameters.put("email",email.getText().toString());
+
+                                    return parameters;
+                                }
+                            };
+                            requestQueue.add(request);
+
+                        }
+
+                    });
+                }
+
+
+                //Teacher
+
+
+
+
+
+
+
+
+
+
+
+
+
+                //STUDENT
+
+
+
+
+                else {
+                    batch.setVisibility(View.VISIBLE);
+                    submit.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            StringRequest request = new StringRequest(Request.Method.POST, insertStudentUrl, new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+
+                                    System.out.println(response.toString());
+                                    try {
+                                        JSONObject jsonObject=new JSONObject(response);
+                                        if (jsonObject.names().get(0).equals("reg_failed")){
+                                            Toast.makeText(getApplicationContext(),jsonObject.getString("reg_failed"),Toast.LENGTH_LONG).show();
+
+                                        }else if (jsonObject.names().get(0).equals("empty")){
+                                            Toast.makeText(getApplicationContext(),jsonObject.getString("empty"),Toast.LENGTH_SHORT).show();
+
+                                        }
+                                        else {
+                                            Toast.makeText(getApplicationContext(),"Done",Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+
+
+
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }, new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+
+                                }
+                            }) {
+
+                                @Override
+                                protected Map<String, String> getParams() throws AuthFailureError {
+                                    if (id.getText().equals("")||name.getText().equals("")||password.getText().equals("")||batch.getText().equals("")||email.getText().equals("")){
+                                        Toast.makeText(getApplicationContext(),"please fill all the fields",Toast.LENGTH_SHORT).show();
+                                        return null;
+                                    }
+                                    else {
+                                        Map<String, String> parameters = new HashMap<String, String>();
+                                        parameters.put("sid", id.getText().toString());
+                                        parameters.put("name", name.getText().toString());
+                                        parameters.put("password", password.getText().toString());
+                                        parameters.put("batch", batch.getText().toString());
+                                        parameters.put("email", email.getText().toString());
+
+                                        return parameters;
+                                    }
+                                }
+                            };
+                            requestQueue.add(request);
+
+                        }
+
+                    });
+
+                }
+            }
+        });
+        submit.setOnClickListener(new View.OnClickListener(){
+                                     @Override
+                                     public void onClick(View view) {
+                                         if (srb.isChecked()||!trb.isChecked()){
+                                             Toast.makeText(getApplicationContext(),"please choose student or teacher",Toast.LENGTH_SHORT).show();
+                                         }
+                                     }
+                                 }
+        );
+    }
+
+}
