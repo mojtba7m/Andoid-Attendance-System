@@ -4,9 +4,9 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/startLec"
+        android:id="@+id/Search"
 
-        android:text="Search and Join"
+        android:text="@string/search_and_join"
         android:textColor="#FCFFFD"
         android:textSize="30sp"
 

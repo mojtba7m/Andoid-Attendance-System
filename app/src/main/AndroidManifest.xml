@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mojtba.myapplication">
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE">
-    </uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE">
-    </uses-permission>
-
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE">
-
-    </uses-permission>
-
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.WIFI_SETTINGS"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
 
     <application
@@ -22,6 +21,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".StudentActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity android:name=".TeacherActivity">
@@ -32,11 +35,7 @@
 
 
         <activity android:name=".HomeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
 
-            </intent-filter>
         </activity>
         <activity android:name=".MainActivity">
 
