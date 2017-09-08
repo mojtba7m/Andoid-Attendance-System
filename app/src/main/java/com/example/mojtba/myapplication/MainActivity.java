@@ -170,7 +170,10 @@ public class MainActivity extends AppCompatActivity {
                         submit.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-
+                            if (spinner.getSelectedItem().toString().equals("Level")){
+                                Toast.makeText(getApplicationContext(),"Select Level",Toast.LENGTH_SHORT).show();
+                            }
+                            else {
                                 StringRequest request = new StringRequest(Request.Method.POST, insertStudentUrl, new Response.Listener<String>() {
                                     @Override
                                     public void onResponse(String response) {
@@ -219,14 +222,15 @@ public class MainActivity extends AppCompatActivity {
                                 };
 
                                 requestQueue.add(request);
-
+                            }
                         }
 
                     });
 
 
             }
-        }});
+                }});
+
         submit.setOnClickListener(new View.OnClickListener(){
                                      @Override
                                      public void onClick(View view) {
