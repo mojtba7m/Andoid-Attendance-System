@@ -34,8 +34,8 @@ public class AddCourseActivity extends AppCompatActivity{
     RequestQueue requestQueue;
     Spinner spinner;
     ArrayAdapter<CharSequence> adapter;
-//    private static final String INSERT_URL="http://10.42.0.1/insertCourse.php";
-    private static final String INSERT_URL="http://10.0.2.2/insertCourse.php";
+    private static final String INSERT_URL="http://10.42.0.1/insertCourse.php";
+//    private static final String INSERT_URL="http://10.0.2.2/insertCourse.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

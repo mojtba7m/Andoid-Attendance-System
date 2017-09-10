@@ -40,10 +40,10 @@ public class MainActivity extends AppCompatActivity {
     RadioGroup rg;
     RadioButton trb,srb;
     RequestQueue requestQueue;
-    //String insertStudentUrl = "http://10.42.0.1/insertStudent.php";
-    //String insertTeacherUrl = "http://10.42.0.1/insertTeacher.php";
-    String insertStudentUrl = "http://10.0.2.2/insertStudent.php";
-    String insertTeacherUrl = "http://10.0.2.2/insertTeacher.php";
+    String insertStudentUrl = "http://10.42.0.1/insertStudent.php";
+    String insertTeacherUrl = "http://10.42.0.1/insertTeacher.php";
+    //String insertStudentUrl = "http://10.0.2.2/insertStudent.php";
+    //String insertTeacherUrl = "http://10.0.2.2/insertTeacher.php";
 
 
     @Override

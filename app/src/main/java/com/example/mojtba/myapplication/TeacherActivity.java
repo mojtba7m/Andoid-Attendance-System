@@ -32,16 +32,19 @@ public class TeacherActivity extends AppCompatActivity {
         addCourse=(Button)findViewById(R.id.add);
         name=(EditText)findViewById(R.id.CourseName);
         start=(Button)findViewById(R.id.Search);
-        wifiApManager = new WifiApManager(getApplicationContext());
         Global.coursename = String.valueOf(name.getText());
+        Toast.makeText(this, Global.coursename, Toast.LENGTH_SHORT).show();
 
 
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                wifiApManager.setWifiApEnabled(null, true);
-                Toast.makeText(TeacherActivity.this,String.valueOf(Global.coursename),Toast.LENGTH_SHORT).show();
+                wifiApManager = new WifiApManager(getApplicationContext(),name.getText().toString());
 
+                Toast.makeText(TeacherActivity.this, name.getText().toString(), Toast.LENGTH_SHORT).show();
+                wifiApManager.setWifiApEnabled(null, true);
+                Intent intentt = new Intent(TeacherActivity.this, TeacherList.class);
+                startActivity(intentt);
 
             }
         });

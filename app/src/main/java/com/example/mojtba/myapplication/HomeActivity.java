@@ -34,10 +34,10 @@ Button login,signup;
     RadioGroup rg;
 
     private RequestQueue requestQueue;
-    //private static final String SLOGIN_URL="http://10.42.0.1/studentLogin.php";
-    //private static final String TLOGIN_URL="http://10.42.0.1/teacherLogin.php";
-    private static final String SLOGIN_URL="http://10.0.2.2/studentLogin.php";
-    private static final String TLOGIN_URL="http://10.0.2.2/teacherLogin.php";
+    private static final String SLOGIN_URL="http://10.42.0.1/studentLogin.php";
+    private static final String TLOGIN_URL="http://10.42.0.1/teacherLogin.php";
+    //private static final String SLOGIN_URL="http://10.0.2.2/studentLogin.php";
+    //private static final String TLOGIN_URL="http://10.0.2.2/teacherLogin.php";
 
     private StringRequest request;
 

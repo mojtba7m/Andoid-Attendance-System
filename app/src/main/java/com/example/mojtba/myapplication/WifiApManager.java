@@ -21,9 +21,11 @@ import android.util.Log;
 public class WifiApManager {
     private final WifiManager mWifiManager;
     private Context context;
+    String name;
 
-    public WifiApManager(Context context) {
+    public WifiApManager(Context context,String name) {
         this.context = context;
+        this.name=name;
         mWifiManager = (WifiManager) this.context.getSystemService(Context.WIFI_SERVICE);
     }
 
@@ -49,7 +51,7 @@ public class WifiApManager {
             //changed "CourseName" to Global.coursename
 
 
-            setHotspotName(Global.coursename,context);
+            setHotspotName(name,context);
             return (Boolean) method.invoke(mWifiManager, wifiConfig, enabled);
         } catch (Exception e) {
             Log.e(this.getClass().toString(), "", e);
@@ -143,7 +145,7 @@ public class WifiApManager {
      * @param finishListener, Interface called when the scan method finishes
      */
     public void getClientList(boolean onlyReachables, FinishScanListener finishListener) {
-        getClientList(onlyReachables, 300, finishListener );
+        getClientList(onlyReachables, 100000, finishListener );
     }
 
     /**
@@ -160,6 +162,7 @@ public class WifiApManager {
 
                 BufferedReader br = null;
                 final ArrayList<ClientScanResult> result = new ArrayList<ClientScanResult>();
+                ClientScanResult c =new ClientScanResult("tytguyiuoi","..:..:..:..:..:..","srdfghjk",true);
 
                 try {
                     br = new BufferedReader(new FileReader("/proc/net/arp"));

@@ -24,6 +24,9 @@
         <activity android:name=".StudentActivity">
 
         </activity>
+        <activity android:name=".TeacherList">
+
+    </activity>
 
         <activity android:name=".TeacherActivity">
 
